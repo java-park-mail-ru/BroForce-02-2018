@@ -1,6 +1,5 @@
 package application.controllers.messages;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum Message {
     SIGNED_UP("User signed up"),
