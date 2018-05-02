@@ -3,6 +3,8 @@ CREATE TABLE IF NOT EXISTS users (
   login    VARCHAR(50)  NOT NULL UNIQUE,
   email    VARCHAR(50)  NOT NULL UNIQUE,
   password VARCHAR(200) NOT NULL,
-  score    INTEGER      DEFAULT 0
+  avatar   VARCHAR,
+  scoreS    INTEGER      DEFAULT 0,
+  scoreM    INTEGER      DEFAULT 0
 );
 

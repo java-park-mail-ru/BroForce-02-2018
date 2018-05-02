@@ -74,12 +74,20 @@ public class UserService {
         return user != null && encoder.matches(password, user.getPassword());
     }
 
-    public Integer updateScore(long id, boolean result) {
-        return db.updateScore(id, result);
+    public void updateScoreS(long id) {
+        db.updateScoreS(id);
     }
 
-    public List<User> getTop(Integer limit, Integer since) {
-        return db.getTop(limit, since);
+    public void updateScoreM(long id) {
+        db.updateScoreM(id);
+    }
+
+    public List<User> getTopS(Integer limit, Integer since) {
+        return db.getTopS(limit, since);
+    }
+
+    public List<User> getTopM(Integer limit, Integer since) {
+        return db.getTopM(limit, since);
     }
 
     public void clear() {

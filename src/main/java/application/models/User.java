@@ -7,15 +7,17 @@ public class User {
     private String password;
     private String email;
     private String avatar;
-    private int score;
+    private int scoreS;
+    private int scoreM;
 
-    public User(Long id, String login, String password, String email) {
+    public User(Long id, String login, String password, String email, String ava, int ss, int sm) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.email = email;
-        this.avatar = "";
-        score = 0;
+        this.avatar = ava;
+        scoreS = ss;
+        scoreM = sm;
     }
 
     public Long getId() {
@@ -38,6 +40,14 @@ public class User {
         return avatar;
     }
 
+    public int getScoreS() {
+        return scoreS;
+    }
+
+    public int getScoreM() {
+        return scoreM;
+    }
+
     public void setLogin(String login) {
         this.login = login;
     }
@@ -53,4 +63,13 @@ public class User {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
+    public void setScoreS(int score) {
+        scoreS = score;
+    }
+
+    public void setScoreM(int score) {
+        scoreM = score;
+    }
+
 }

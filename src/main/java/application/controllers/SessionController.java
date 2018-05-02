@@ -217,6 +217,22 @@ public class SessionController {
         return ResponseEntity.ok(new MessageResponse(USER_PROFILE_UPDATED));
     }
 
+    @PostMapping(path = "/api/win", consumes = JSON, produces = JSON)
+    public ResponseEntity<Object> updateS(HttpSession session) {
+        final Long id = (Long) session.getAttribute("userId");
+        if (id == null) {
+            return ResponseEntity.badRequest().body(new ErrorResponse(NOT_AUTHORIZED));
+        }
+
+        final User user = service.getUser(id);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse(WRONG_ID));
+        }
+
+        service.updateScoreS(id);
+        return ResponseEntity.ok(new MessageResponse(USER_PROFILE_UPDATED));
+    }
+
     @DeleteMapping(path = "/api/logout", produces = JSON)
     public ResponseEntity logout(HttpSession session) {
         if (session.getAttribute("userId") == null) {
@@ -245,15 +261,29 @@ public class SessionController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(WRONG_LOGIN));
     }
 
-    @GetMapping(path = "/api/top", produces = JSON)
-    public ResponseEntity getSTopp(@RequestParam(value = "limit", required = false) Integer limit,
-                                   @RequestParam(value = "since", required = false) Integer since) {
+
+
+    @GetMapping(path = "/api/tops", produces = JSON)
+    public ResponseEntity getTopS(@RequestParam(value = "limit", required = false) Integer limit,
+                                  @RequestParam(value = "since", required = false) Integer since) {
         if (limit == null) {
             limit = 10;
         }
         if (since == null) {
             since = 0;
         }
-        return ResponseEntity.status(HttpStatus.OK).body(service.getTop(limit, since));
+        return ResponseEntity.status(HttpStatus.OK).body(service.getTopS(limit, since));
+    }
+
+    @GetMapping(path = "/api/topm", produces = JSON)
+    public ResponseEntity getTopM(@RequestParam(value = "limit", required = false) Integer limit,
+                                  @RequestParam(value = "since", required = false) Integer since) {
+        if (limit == null) {
+            limit = 10;
+        }
+        if (since == null) {
+            since = 0;
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(service.getTopM(limit, since));
     }
 }

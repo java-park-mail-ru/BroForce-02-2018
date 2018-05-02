@@ -29,9 +29,14 @@ public interface DAOi {
     boolean checkSignup(@NotNull String login, @NotNull String email);
 
     @NotNull
-    Integer updateScore(long userId, boolean result);
+    Integer updateScoreS(long userId);
 
-    List<User> getTop(@NotNull Integer limit, @NotNull Integer since);
+    @NotNull
+    Integer updateScoreM(long userId);
+
+    List<User> getTopS(@NotNull Integer limit, @NotNull Integer since);
+
+    List<User> getTopM(@NotNull Integer limit, @NotNull Integer since);
 
     void clear();
 }

@@ -36,8 +36,9 @@ public class DbDAO implements DAOi {
                     + "login = ?, "
                     + "email = ?, "
                     + "password = ? "
+                    + "avatar = ?"
                     + "WHERE id = ?";
-            template.update(query, user.getLogin(), user.getEmail(), user.getPassword(), user.getId());
+            template.update(query, user.getLogin(), user.getEmail(), user.getPassword(), user.getAvatar(), user.getId());
         } catch (DuplicateKeyException e) {
             LOGGER.error("DuplicateKeyException in changeUserData");
         }
@@ -47,7 +48,10 @@ public class DbDAO implements DAOi {
             new User(res.getLong("id"),
                     res.getString("login"),
                     res.getString("password"),
-                    res.getString("email")
+                    res.getString("email"),
+                    res.getString("avatar"),
+                    res.getInt("scoreS"),
+                    res.getInt("scoreM")
             );
 
     @Override
@@ -85,14 +89,15 @@ public class DbDAO implements DAOi {
 
     @Override
     @NotNull
-    public Integer updateScore(long userId, boolean result) {
-        String query = "UPDATE users SET score = score ";
-        if (result) {
-            query += "+ " + SCORE_CHANGE + ' ';
-        } else {
-            query += "- " + SCORE_CHANGE + ' ';
-        }
-        query += "WHERE id = ? RETURNING score";
+    public Integer updateScoreS(long userId) {
+        String query = "UPDATE users SET scoreS = scoreS + " + SCORE_CHANGE + " WHERE id = ? RETURNING scoreS";
+        return template.queryForObject(query, Integer.class, userId);
+    }
+
+    @Override
+    @NotNull
+    public Integer updateScoreM(long userId) {
+        String query = "UPDATE users SET scoreM = scoreM + " + SCORE_CHANGE + " WHERE id = ? RETURNING scoreM";
         return template.queryForObject(query, Integer.class, userId);
     }
 
@@ -120,8 +125,15 @@ public class DbDAO implements DAOi {
 
     @Override
     @NotNull
-    public List<User> getTop(@NotNull Integer limit, @NotNull Integer since) {
-        final String query = "SELECT * FROM users ORDER BY score DESC LIMIT ? OFFSET ?";
+    public List<User> getTopS(@NotNull Integer limit, @NotNull Integer since) {
+        final String query = "SELECT * FROM users ORDER BY scoreS DESC LIMIT ? OFFSET ?";
+        return template.query(query, USER_MAPPER, limit, since);
+    }
+
+    @Override
+    @NotNull
+    public List<User> getTopM(@NotNull Integer limit, @NotNull Integer since) {
+        final String query = "SELECT * FROM users ORDER BY scoreM DESC LIMIT ? OFFSET ?";
         return template.query(query, USER_MAPPER, limit, since);
     }
 
