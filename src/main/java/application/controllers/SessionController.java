@@ -18,6 +18,7 @@ import static application.controllers.messages.Message.*;
 
 
 @RestController
+@CrossOrigin(origins = {"https://broforce-frontend.herokuapp.com", "https://localhost:3000"})
 public class SessionController {
     private final UserService service;
     public static final String JSON = MediaType.APPLICATION_JSON_UTF8_VALUE;
@@ -233,7 +234,7 @@ public class SessionController {
         return ResponseEntity.ok(new MessageResponse(USER_PROFILE_UPDATED));
     }
 
-    @DeleteMapping(path = "/api/logout", produces = JSON)
+    @PostMapping(path = "/api/logout", produces = JSON)
     public ResponseEntity logout(HttpSession session) {
         if (session.getAttribute("userId") == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse(NOT_AUTHORIZED));
@@ -261,8 +262,7 @@ public class SessionController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(WRONG_LOGIN));
     }
 
-
-
+    
     @GetMapping(path = "/api/tops", produces = JSON)
     public ResponseEntity getTopS(@RequestParam(value = "limit", required = false) Integer limit,
                                   @RequestParam(value = "since", required = false) Integer since) {
