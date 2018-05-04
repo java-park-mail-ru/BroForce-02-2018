@@ -18,7 +18,7 @@ import static application.controllers.messages.Message.*;
 
 
 @RestController
-@CrossOrigin //(origins = {"https://broforce-frontend.herokuapp.com", "https://localhost:3000"})
+@CrossOrigin (origins = {"https://broforce-frontend.herokuapp.com", "http://localhost:3000", "https://localhost:3000"})
 public class SessionController {
     private final UserService service;
     public static final String JSON = MediaType.APPLICATION_JSON_UTF8_VALUE;
@@ -31,7 +31,7 @@ public class SessionController {
     public ResponseEntity<Object> getLoggedUser(HttpSession session) {
         final Long id = (Long) session.getAttribute("userId");
         if (id == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse(NOT_AUTHORIZED));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse(WRONG_ID));
         }
 
         final User user = service.getUser(id);
