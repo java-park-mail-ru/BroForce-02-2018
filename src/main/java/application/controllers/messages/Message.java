@@ -15,8 +15,7 @@ public enum Message {
     LOGGED_OUT("User logged out"),
     NOT_AUTHORIZED("User not authorized"),
     ALREADY_AUTHORIZED("User is already authorized"),
-    USER_PROFILE_UPDATED("User profile data updated"),
-    OK("OK");
+    USER_PROFILE_UPDATED("User profile data updated");
 
     private final String message;
 
