@@ -9,8 +9,8 @@ public class Enemy extends Entity {
 
 
     public Enemy() {
-        xCoord = Math.random();
-        yCoord = Math.random();
+        xx = Math.random();
+        yy = Math.random();
         size = Math.random() * (MAX_SIZE - MIN_SIZE) + MIN_SIZE;
         direction = Math.random() * Math.PI * 2;
         speed = size / 10;
@@ -22,27 +22,31 @@ public class Enemy extends Entity {
         if (dist(this, p1) / p1.size < D_DIST &&
                 dist(this, p2) / p2.size < D_DIST) {
 
-            double p1Angle = Math.acos((xCoord - p1.xCoord) / dist(this, p1));
-            if (Math.asin((xCoord - p1.xCoord) / dist(this, p1)) < 0)
+            double p1Angle = Math.acos((xx - p1.xx) / dist(this, p1));
+            if (Math.asin((xx - p1.xx) / dist(this, p1)) < 0) {
                 p1Angle += 2 * Math.PI;
-            double p2Angle = Math.acos((xCoord - p2.xCoord) / dist(this, p2));
-            if (Math.asin((xCoord - p2.xCoord) / dist(this, p2)) < 0)
+            }
+            double p2Angle = Math.acos((xx - p2.xx) / dist(this, p2));
+            if (Math.asin((xx - p2.xx) / dist(this, p2)) < 0) {
                 p2Angle += 2 * Math.PI;
+            }
             direction = (p1Angle + p2Angle) / 2;
 
         } else {
 
             if (dist(this, p1) / p1.size < D_DIST) {
-                double p1Angle = Math.acos((xCoord - p1.xCoord) / dist(this, p1));
-                if (Math.asin((xCoord - p1.xCoord) / dist(this, p1)) < 0)
+                double p1Angle = Math.acos((xx - p1.xx) / dist(this, p1));
+                if (Math.asin((xx - p1.xx) / dist(this, p1)) < 0) {
                     p1Angle += 2 * Math.PI;
+                }
                 direction = p1Angle;
             }
 
             if (dist(this, p2) / p2.size < D_DIST) {
-                double p2Angle = Math.acos((xCoord - p2.xCoord) / dist(this, p2));
-                if (Math.asin((xCoord - p2.xCoord) / dist(this, p2)) < 0)
+                double p2Angle = Math.acos((xx - p2.xx) / dist(this, p2));
+                if (Math.asin((xx - p2.xx) / dist(this, p2)) < 0) {
                     p2Angle += 2 * Math.PI;
+                }
                 direction = p2Angle;
             }
 
@@ -54,8 +58,8 @@ public class Enemy extends Entity {
 
 
     public void reincarnation() {
-        xCoord = Math.random();
-        yCoord = Math.random();
+        xx = Math.random();
+        yy = Math.random();
         size = Math.random() * (MAX_SIZE - MIN_SIZE) + MIN_SIZE;
         direction = Math.random() * Math.PI * 2;
         speed = size / 10;

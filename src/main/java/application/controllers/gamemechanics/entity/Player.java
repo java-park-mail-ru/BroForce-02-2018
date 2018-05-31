@@ -13,9 +13,9 @@ public class Player extends Entity {
     private double curDirection;
 
 
-    public Player(double x, double y) {
-        xCoord = x;
-        yCoord = y;
+    public Player(double xxx, double yyy) {
+        xx = xxx;
+        yy = yyy;
         size = MIN_SIZE;
         direction = 0;
         curDirection = 0;
@@ -42,19 +42,23 @@ public class Player extends Entity {
     public void move() {
         super.move();
         speed -= SPEED_DIF;
-        if (speed < 0)
+        if (speed < 0) {
             speed = 0;
+        }
         if (curDirection != direction) {
             final double dif = curDirection - direction;
             final int sign1 = dif > 0 ? 1 : -1;
             final int sign2 = Math.abs(dif) > Math.PI ? -1 : 1;
             direction += ANGLE_STEP * sign1 * sign2;
-            if (direction > Math.PI * 2)
+            if (direction > Math.PI * 2) {
                 direction -= Math.PI * 2;
-            if (direction < 0)
+            }
+            if (direction < 0) {
                 direction += Math.PI * 2;
-            if (Math.abs(curDirection - direction) < ANGLE_STEP)
+            }
+            if (Math.abs(curDirection - direction) < ANGLE_STEP) {
                 direction = curDirection;
+            }
         }
     }
 
@@ -73,16 +77,19 @@ public class Player extends Entity {
             case RIGHT:
                 curDirection = 0;
                 break;
+            default:
+                break;
         }
         speed += SPEED_DIF * 2;
-        if (speed > MAX_SPEED)
+        if (speed > MAX_SPEED) {
             speed = MAX_SPEED;
+        }
     }
 
 
     private boolean isTouched(@NotNull Entity enemy) {
-        return (Math.pow(xCoord - enemy.xCoord, 2) +
-                Math.pow(yCoord - enemy.yCoord, 2)) <
+        return (Math.pow(xx - enemy.xx, 2) +
+                Math.pow(yy - enemy.yy, 2)) <
                 Math.pow(size + enemy.size, 2);
     }
 

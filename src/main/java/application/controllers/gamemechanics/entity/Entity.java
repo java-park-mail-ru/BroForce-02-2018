@@ -4,44 +4,45 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Entity {
 
-    protected double xCoord;
-    protected double yCoord;
+    protected double xx;
+    protected double yy;
     protected double size;
     protected double direction;
     protected double speed;
 
 
     public void move() {
-        xCoord += Math.cos(direction) * speed;
-        yCoord += Math.sin(direction) * speed;
-        if (xCoord > 1) {
-            xCoord = 1;
+        xx += Math.cos(direction) * speed;
+        yy += Math.sin(direction) * speed;
+        if (xx > 1) {
+            xx = 1;
             direction = Math.PI - direction;
-        } else if (xCoord < 0) {
-            xCoord = 0;
+        } else if (xx < 0) {
+            xx = 0;
             direction = Math.PI - direction;
         }
-        if (yCoord > 1) {
-            yCoord = 1;
+        if (yy > 1) {
+            yy = 1;
             direction = 2 * Math.PI - direction;
-        } else if (yCoord < 0) {
-            yCoord = 0;
+        } else if (yy < 0) {
+            yy = 0;
             direction = 2 * Math.PI - direction;
         }
-        if (direction < 0)
+        if (direction < 0) {
             direction += 2 * Math.PI;
+        }
     }
 
 
-    @JsonProperty("xCoord")
-    public double getxCoord() {
-        return xCoord;
+    @JsonProperty("xx")
+    public double getxx() {
+        return xx;
     }
 
 
-    @JsonProperty("yCoord")
-    public double getyCoord() {
-        return yCoord;
+    @JsonProperty("yy")
+    public double getyy() {
+        return yy;
     }
 
 
@@ -52,8 +53,8 @@ public class Entity {
 
 
     static double dist(Entity e1, Entity e2) {
-        return (Math.sqrt(Math.pow(e1.xCoord - e2.xCoord, 2) +
-                Math.pow(e1.yCoord - e2.yCoord, 2)));
+        return (Math.sqrt(Math.pow(e1.xx - e2.xx, 2) +
+                Math.pow(e1.yy - e2.yy, 2)));
     }
 
 }
