@@ -5,6 +5,7 @@ import application.controllers.requests.SigninRequest;
 import application.controllers.requests.SignupRequest;
 import application.controllers.responses.ErrorResponse;
 import application.controllers.responses.MessageResponse;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +19,17 @@ import static application.controllers.messages.Message.*;
 
 
 @RestController
-@CrossOrigin (origins = {"https://broforce-frontend.herokuapp.com", "http://localhost:3000", "https://localhost:3000"})
+@CrossOrigin(origins = "*", allowCredentials = "true")
 public class SessionController {
+
+    @NotNull
     private final UserService service;
     public static final String JSON = MediaType.APPLICATION_JSON_UTF8_VALUE;
 
-    public SessionController(UserService service) {
+    public SessionController(@NotNull UserService service) {
         this.service = service;
     }
+
 
     @GetMapping("/api/loginfo")
     public ResponseEntity<Object> getLoggedUser(HttpSession session) {
@@ -41,6 +45,7 @@ public class SessionController {
 
         return ResponseEntity.ok(user);
     }
+
 
     @PostMapping(path = "/api/signup", consumes = JSON, produces = JSON)
     public ResponseEntity<Object> signUp(@RequestBody(required = false) SignupRequest profile, HttpSession session) {
@@ -70,6 +75,7 @@ public class SessionController {
         return ResponseEntity.ok().body(new MessageResponse(SIGNED_UP));
     }
 
+
     @PostMapping(path = "/api/signin", consumes = JSON, produces = JSON)
     public ResponseEntity<Object> signIn(@RequestBody(required = false) SigninRequest profile, HttpSession session) {
         if (session.getAttribute("userId") != null) {
@@ -98,6 +104,7 @@ public class SessionController {
         return ResponseEntity.ok(new MessageResponse(AUTHORIZED));
     }
 
+
     @PostMapping(path = "/api/newpassword", consumes = JSON, produces = JSON)
     public ResponseEntity<Object> setPassword(@RequestBody(required = false) ChangeRequest body, HttpSession session) {
         final Long id = (Long) session.getAttribute("userId");
@@ -125,6 +132,7 @@ public class SessionController {
         service.changePassword(user, body.getModifiedString());
         return ResponseEntity.ok(new MessageResponse(USER_PROFILE_UPDATED));
     }
+
 
     @PostMapping(path = "/api/newlogin", consumes = JSON, produces = JSON)
     public ResponseEntity<Object> setLogin(@RequestBody(required = false) ChangeRequest body, HttpSession session) {
@@ -158,6 +166,7 @@ public class SessionController {
         return ResponseEntity.ok(new MessageResponse(USER_PROFILE_UPDATED));
     }
 
+
     @PostMapping(path = "/api/newemail", consumes = JSON, produces = JSON)
     public ResponseEntity<Object> setEmail(@RequestBody(required = false) ChangeRequest body, HttpSession session) {
         final Long id = (Long) session.getAttribute("userId");
@@ -190,6 +199,7 @@ public class SessionController {
         return ResponseEntity.ok(new MessageResponse(USER_PROFILE_UPDATED));
     }
 
+
     @PostMapping(path = "/api/newavatar", consumes = JSON, produces = JSON)
     public ResponseEntity<Object> setAvatar(@RequestBody(required = false) ChangeRequest body, HttpSession session) {
         final Long id = (Long) session.getAttribute("userId");
@@ -218,6 +228,7 @@ public class SessionController {
         return ResponseEntity.ok(new MessageResponse(USER_PROFILE_UPDATED));
     }
 
+
     @PostMapping(path = "/api/win", consumes = JSON, produces = JSON)
     public ResponseEntity<Object> updateS(HttpSession session) {
         final Long id = (Long) session.getAttribute("userId");
@@ -234,6 +245,7 @@ public class SessionController {
         return ResponseEntity.ok(new MessageResponse(USER_PROFILE_UPDATED));
     }
 
+
     @PostMapping(path = "/api/logout", produces = JSON)
     public ResponseEntity logout(HttpSession session) {
         if (session.getAttribute("userId") == null) {
@@ -243,6 +255,7 @@ public class SessionController {
         session.removeAttribute("userId");
         return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse(LOGGED_OUT));
     }
+
 
     @DeleteMapping("/api/clear")
     public ResponseEntity<Object> clear(HttpSession session) {
@@ -262,7 +275,7 @@ public class SessionController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(WRONG_LOGIN));
     }
 
-    
+
     @GetMapping(path = "/api/tops", produces = JSON)
     public ResponseEntity getTopS(@RequestParam(value = "limit", required = false) Integer limit,
                                   @RequestParam(value = "since", required = false) Integer since) {
@@ -274,6 +287,7 @@ public class SessionController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(service.getTopS(limit, since));
     }
+
 
     @GetMapping(path = "/api/topm", produces = JSON)
     public ResponseEntity getTopM(@RequestParam(value = "limit", required = false) Integer limit,
