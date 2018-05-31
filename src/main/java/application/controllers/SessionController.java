@@ -18,12 +18,14 @@ import static application.controllers.messages.Message.*;
 
 
 @RestController
-@CrossOrigin (origins = {"https://broforce-frontend.herokuapp.com", "http://localhost:3000", "https://localhost:3000"})
+@CrossOrigin(origins = "*", allowCredentials = "true")
 public class SessionController {
+    
+    @NotNull
     private final UserService service;
     public static final String JSON = MediaType.APPLICATION_JSON_UTF8_VALUE;
 
-    public SessionController(UserService service) {
+    public SessionController(@NotNull UserService service) {
         this.service = service;
     }
 
