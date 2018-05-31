@@ -39,7 +39,7 @@ public class SessionController {
 
         final User user = service.getUser(id);
         if (user == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse(NOT_AUTHORIZED));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponse(WRONG_ID));
         }
 
         return ResponseEntity.ok(user);
