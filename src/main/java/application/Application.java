@@ -2,7 +2,6 @@ package application;
 
 import application.db.UserDao;
 import application.db.UserDaoImpl;
-import application.websocket.GameSocketHandler;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,11 +26,6 @@ public class Application {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public WebSocketHandler gameWebSocketHandler() {
-        return new PerConnectionWebSocketHandler(GameSocketHandler.class);
     }
 
 }
