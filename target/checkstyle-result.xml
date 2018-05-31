@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.8">
+<file name="/home/batrsens/IdeaProjects/brogit/aa/qq23/BroForce-02-2018/src/main/java/application/database/DAOi.java">
+</file>
+<file name="/home/batrsens/IdeaProjects/brogit/aa/qq23/BroForce-02-2018/src/main/java/application/database/DbDAO.java">
+</file>
+<file name="/home/batrsens/IdeaProjects/brogit/aa/qq23/BroForce-02-2018/src/main/java/application/controllers/responses/MessageResponse.java">
+</file>
+<file name="/home/batrsens/IdeaProjects/brogit/aa/qq23/BroForce-02-2018/src/main/java/application/controllers/responses/ErrorResponse.java">
+</file>
+<file name="/home/batrsens/IdeaProjects/brogit/aa/qq23/BroForce-02-2018/src/main/java/application/controllers/SessionController.java">
+</file>
+<file name="/home/batrsens/IdeaProjects/brogit/aa/qq23/BroForce-02-2018/src/main/java/application/controllers/requests/ChangeRequest.java">
+</file>
+<file name="/home/batrsens/IdeaProjects/brogit/aa/qq23/BroForce-02-2018/src/main/java/application/controllers/requests/SigninRequest.java">
+</file>
+<file name="/home/batrsens/IdeaProjects/brogit/aa/qq23/BroForce-02-2018/src/main/java/application/controllers/requests/SignupRequest.java">
+</file>
+<file name="/home/batrsens/IdeaProjects/brogit/aa/qq23/BroForce-02-2018/src/main/java/application/controllers/messages/Message.java">
+</file>
+<file name="/home/batrsens/IdeaProjects/brogit/aa/qq23/BroForce-02-2018/src/main/java/application/controllers/gamemechanics/entity/Enemy.java">
+</file>
+<file name="/home/batrsens/IdeaProjects/brogit/aa/qq23/BroForce-02-2018/src/main/java/application/controllers/gamemechanics/entity/Player.java">
+</file>
+<file name="/home/batrsens/IdeaProjects/brogit/aa/qq23/BroForce-02-2018/src/main/java/application/controllers/gamemechanics/entity/Entity.java">
+</file>
+<file name="/home/batrsens/IdeaProjects/brogit/aa/qq23/BroForce-02-2018/src/main/java/application/controllers/gamemechanics/entity/Direction.java">
+</file>
+<file name="/home/batrsens/IdeaProjects/brogit/aa/qq23/BroForce-02-2018/src/main/java/application/controllers/gamemechanics/Game.java">
+</file>
+<file name="/home/batrsens/IdeaProjects/brogit/aa/qq23/BroForce-02-2018/src/main/java/application/models/UserService.java">
+</file>
+<file name="/home/batrsens/IdeaProjects/brogit/aa/qq23/BroForce-02-2018/src/main/java/application/models/User.java">
+</file>
+<file name="/home/batrsens/IdeaProjects/brogit/aa/qq23/BroForce-02-2018/src/main/java/application/Application.java">
+</file>
+<file name="/home/batrsens/IdeaProjects/brogit/aa/qq23/BroForce-02-2018/src/main/resources/application.properties">
+</file>
+</checkstyle>

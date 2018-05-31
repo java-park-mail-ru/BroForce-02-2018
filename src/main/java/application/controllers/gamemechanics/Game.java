@@ -17,11 +17,12 @@ public class Game {
     private int winner;
 
     public Game() {
-        player1 = new Player(1/3, 1/3);
-        player2 = new Player(2/3, 2/3);
+        player1 = new Player(1 / 3, 1 / 3);
+        player2 = new Player(2 / 3, 2 / 3);
         bots = new ArrayList<>();
-        for (int i = 0; i < NUMBER_OF_BOTS; i++)
+        for (int i = 0; i < NUMBER_OF_BOTS; i++) {
             bots.add(new Enemy());
+        }
         winner = 0;
     }
 
@@ -30,13 +31,15 @@ public class Game {
         player2.move();
         for (Enemy b : bots) {
             b.move();
-            if (!player1.eat(b))
+            if (!player1.eat(b)) {
                 player2.eat(b);
+            }
         }
-        if (player1.isEaten(player2))
+        if (player1.isEaten(player2)) {
             winner = 1;
-        else if (player2.isEaten(player1))
+        } else if (player2.isEaten(player1)) {
             winner = 2;
+        }
     }
 
     public void buttonClick(Direction dir, int player) {
