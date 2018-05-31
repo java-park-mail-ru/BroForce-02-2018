@@ -19,8 +19,8 @@ public class Enemy extends Entity {
 
     public void move(Player p1, Player p2) {
 
-        if (dist(this, p1) / p1.size < D_DIST &&
-                dist(this, p2) / p2.size < D_DIST) {
+        if (dist(this, p1) / p1.size < D_DIST
+                && dist(this, p2) / p2.size < D_DIST) {
 
             double p1Angle = Math.acos((xx - p1.xx) / dist(this, p1));
             if (Math.asin((xx - p1.xx) / dist(this, p1)) < 0) {

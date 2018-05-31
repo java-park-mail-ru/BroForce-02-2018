@@ -53,8 +53,8 @@ public class Entity {
 
 
     static double dist(Entity e1, Entity e2) {
-        return (Math.sqrt(Math.pow(e1.xx - e2.xx, 2) +
-                Math.pow(e1.yy - e2.yy, 2)));
+        return (Math.sqrt(Math.pow(e1.xx - e2.xx, 2)
+                + Math.pow(e1.yy - e2.yy, 2)));
     }
 
 }

@@ -88,9 +88,9 @@ public class Player extends Entity {
 
 
     private boolean isTouched(@NotNull Entity enemy) {
-        return (Math.pow(xx - enemy.xx, 2) +
-                Math.pow(yy - enemy.yy, 2)) <
-                Math.pow(size + enemy.size, 2);
+        return (Math.pow(xx - enemy.xx, 2)
+                + Math.pow(yy - enemy.yy, 2))
+                < Math.pow(size + enemy.size, 2);
     }
 
 }
