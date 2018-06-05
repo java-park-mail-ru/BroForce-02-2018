@@ -8,7 +8,7 @@ public class MessageResponse {
     @NotNull
     private final String message;
 
-    public MessageResponse(@JsonProperty("error") @NotNull String message) {
+    public MessageResponse(@JsonProperty("message") @NotNull String message) {
         this.message = message;
     }
 
