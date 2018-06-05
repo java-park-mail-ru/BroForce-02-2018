@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @RestController
-@CrossOrigin//(origins = "*", allowCredentials = "true")
+@CrossOrigin(origins = "*", allowCredentials = "true")
 public class SessionController {
     private AccountService service;
     public static final String JSON = MediaType.APPLICATION_JSON_UTF8_VALUE;
