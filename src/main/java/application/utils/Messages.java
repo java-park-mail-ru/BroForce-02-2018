@@ -1,13 +1,13 @@
 package application.utils;
 
 public class Messages {
-    public static final String NOT_AUTHORIZE = "Это фиаско, братан!";
-    public static final String AUTHORIZED = "Пользователь авторизирован";
-    public static final String EXISTS = "Логин или Email уже существует";
-    public static final String WRONG_LOGIN_PASSWORD = "Неправильный логин или пароль";
-    public static final String WRONG_PASSWORD = "Неправильный пароль";
-    public static final String LOGIN_EXISTS = "Логин уже существует";
-    public static final String EMAIL_EXISTS = "Email уже существует";
-    public static final String SUCCESS = "Успешно";
-    public static final String BAD_COOKIE = "Плохие печеньки";
+    public static final String NOT_AUTHORIZE = "You're not authorized";
+    public static final String AUTHORIZED = "You're authorized";
+    public static final String EXISTS = "Login or email already exists";
+    public static final String WRONG_LOGIN_PASSWORD = "Wrong login or password";
+    public static final String WRONG_PASSWORD = "Wrong password";
+    public static final String LOGIN_EXISTS = "Login already exists";
+    public static final String EMAIL_EXISTS = "Email already exists";
+    public static final String SUCCESS = "Success";
+    public static final String BAD_COOKIE = "Bad cookie";
 }
