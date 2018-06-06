@@ -29,9 +29,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc(print = MockMvcPrint.NONE)
 public class ControllerTest {
-    private static final String LOGIN = "ilya";
+    private static final String LOGIN = "vitalya";
     private static final String PASSWORD = "qwerty123";
-    private static final String EMAIL = "ilya@mail.ru";
+    private static final String EMAIL = "vitalya@mail.ru";
     private static final long BADID = 34348L;
     private long userId;
 
@@ -55,11 +55,11 @@ public class ControllerTest {
     public void signup() throws Exception {
         mock.perform(post("/signup")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"login\":\"ilya123\", \"password\":\"qwerty123\", \"email\":\"ilya123@mail.ru\"}"))
+                .content("{\"login\":\"vitalya123\", \"password\":\"qwerty123\", \"email\":\"vitalya123@mail.ru\"}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("id").value(String.valueOf(userId + 1)))
-                .andExpect(jsonPath("login").value("ilya123"))
-                .andExpect(jsonPath("email").value("ilya123@mail.ru"));
+                .andExpect(jsonPath("login").value("vitalya123"))
+                .andExpect(jsonPath("email").value("vitalya123@mail.ru"));
     }
 
     @Test
@@ -67,7 +67,7 @@ public class ControllerTest {
         mock.perform(post("/signup")
                 .sessionAttr("userId", userId)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"login\":\"ilya123\", \"password\":\"qwerty123\", \"email\":\"ilya123@mail.ru\"}"))
+                .content("{\"login\":\"vitalya123\", \"password\":\"qwerty123\", \"email\":\"vitalya123@mail.ru\"}"))
                 .andExpect(status().isForbidden())
                 .andExpect(jsonPath("message").value(Messages.AUTHORIZED));
     }
@@ -76,19 +76,19 @@ public class ControllerTest {
     public void conflictSignup() throws Exception {
         mock.perform(post("/signup")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"login\":\"ilya\", \"password\":\"qwerty123\", \"email\":\"ilya123@mail.ru\"}"))
+                .content("{\"login\":\"vitalya\", \"password\":\"qwerty123\", \"email\":\"vitalya123@mail.ru\"}"))
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("message").value(Messages.EXISTS));
 
         mock.perform(post("/signup")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"login\":\"ilya123\", \"password\":\"qwerty123\", \"email\":\"ilya@mail.ru\"}"))
+                .content("{\"login\":\"vitalya123\", \"password\":\"qwerty123\", \"email\":\"vitalya@mail.ru\"}"))
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("message").value(Messages.EXISTS));
 
         mock.perform(post("/signup")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"login\":\"ilya\", \"password\":\"qwerty123\", \"email\":\"ilya@mail.ru\"}"))
+                .content("{\"login\":\"vitalya\", \"password\":\"qwerty123\", \"email\":\"vitalya@mail.ru\"}"))
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("message").value(Messages.EXISTS));
     }
@@ -111,7 +111,7 @@ public class ControllerTest {
         error.add(Validator.EMAIL_ERROR);
         mock.perform(post("/signup")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"login\":\"ilya12jvnhjgnvvhgnvhghvnhg3\", \"password\":\"ufhgnvbchftfgdbcvfgcvfvfvv\", \"email\":\"ilya123mail.ru\"}"))
+                .content("{\"login\":\"vitalya12jvnhjgnvvhgnvhghvnhg3\", \"password\":\"ufhgnvbchftfgdbcvfgcvfvfvv\", \"email\":\"vitalya123mail.ru\"}"))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("message").value(error));
 
@@ -121,7 +121,7 @@ public class ControllerTest {
         error.add(Validator.EMAIL_ERROR);
         mock.perform(post("/signup")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"login\":\"вввсакмкмк\", \"password\":\"\", \"email\":\"ilya123mail.ru\"}"))
+                .content("{\"login\":\"вввсакмкмк\", \"password\":\"\", \"email\":\"vitalya123mail.ru\"}"))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("message").value(error));
     }
@@ -130,11 +130,11 @@ public class ControllerTest {
     public void signin() throws Exception {
         mock.perform(post("/signin")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"login\":\"ilya\", \"password\":\"qwerty123\"}"))
+                .content("{\"login\":\"vitalya\", \"password\":\"qwerty123\"}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("id").value(String.valueOf(userId)))
-                .andExpect(jsonPath("login").value("ilya"))
-                .andExpect(jsonPath("email").value("ilya@mail.ru"));
+                .andExpect(jsonPath("login").value("vitalya"))
+                .andExpect(jsonPath("email").value("vitalya@mail.ru"));
     }
 
     @Test
@@ -142,7 +142,7 @@ public class ControllerTest {
         mock.perform(post("/signin")
                 .sessionAttr("userId", userId)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"login\":\"ilya\", \"password\":\"qwerty123\"}"))
+                .content("{\"login\":\"vitalya\", \"password\":\"qwerty123\"}"))
                 .andExpect(status().isForbidden())
                 .andExpect(jsonPath("message").value(Messages.AUTHORIZED));
     }
@@ -157,7 +157,7 @@ public class ControllerTest {
 
         mock.perform(post("/signin")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"login\":\"ilya\", \"password\":\"qwefvty123\"}"))
+                .content("{\"login\":\"vitalya\", \"password\":\"qwefvty123\"}"))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("message").value(Messages.WRONG_LOGIN_PASSWORD));
 
@@ -203,8 +203,8 @@ public class ControllerTest {
                 .content("{\"password\":\"qwerty123\", \"change\":\"qwerty1234\"}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("id").value(String.valueOf(userId)))
-                .andExpect(jsonPath("login").value("ilya"))
-                .andExpect(jsonPath("email").value("ilya@mail.ru"));
+                .andExpect(jsonPath("login").value("vitalya"))
+                .andExpect(jsonPath("email").value("vitalya@mail.ru"));
     }
 
     @Test
@@ -215,7 +215,7 @@ public class ControllerTest {
                 .content("{\"password\":\"qwerty123\", \"change\":\"qwerty@mail.ru\"}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("id").value(String.valueOf(userId)))
-                .andExpect(jsonPath("login").value("ilya"))
+                .andExpect(jsonPath("login").value("vitalya"))
                 .andExpect(jsonPath("email").value("qwerty@mail.ru"));
     }
 
@@ -228,7 +228,7 @@ public class ControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("id").value(String.valueOf(userId)))
                 .andExpect(jsonPath("login").value("qwerty"))
-                .andExpect(jsonPath("email").value("ilya@mail.ru"));
+                .andExpect(jsonPath("email").value("vitalya@mail.ru"));
     }
 
     @Test
@@ -296,7 +296,7 @@ public class ControllerTest {
         mock.perform(post("/newlogin")
                 .sessionAttr("userId", userId)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"password\":\"qwerty123\", \"change\":\"ilya\"}"))
+                .content("{\"password\":\"qwerty123\", \"change\":\"vitalya\"}"))
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("message").value(Messages.LOGIN_EXISTS));
     }
@@ -306,7 +306,7 @@ public class ControllerTest {
         mock.perform(post("/newemail")
                 .sessionAttr("userId", userId)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"password\":\"qwerty123\", \"change\":\"ilya@mail.ru\"}"))
+                .content("{\"password\":\"qwerty123\", \"change\":\"vitalya@mail.ru\"}"))
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("message").value(Messages.EMAIL_EXISTS));
     }
