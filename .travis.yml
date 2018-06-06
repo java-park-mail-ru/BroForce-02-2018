@@ -16,3 +16,13 @@ before_install:
   - psql -c "create user vitalya with password '1324qwer';" -U postgres
   - psql -c "create database brodb;" -U postgres
   - psql -c "grant all on database brodb to vitalya;" -U postgres
+
+#deploy:
+#  provider: heroku
+#  api_key:
+#    secure: $HEROKU_API_KEY
+#  app: BroForce-02-2018
+#  on:
+#    repo: BatrSens/BroForce-02-2018
+#    branch: master
+#  skip_cleanup: true
