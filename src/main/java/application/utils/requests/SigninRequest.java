@@ -1,9 +1,9 @@
-package application.controllers.requests;
+package application.utils.requests;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.jetbrains.annotations.NotNull;
 
+import org.jetbrains.annotations.NotNull;
 
 public class SigninRequest {
 
@@ -28,4 +28,5 @@ public class SigninRequest {
     public String getPassword() {
         return password;
     }
+
 }

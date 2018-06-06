@@ -1,21 +1,21 @@
-package application.controllers.requests;
+package application.utils.requests;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.jetbrains.annotations.NotNull;
 
-public class ChangeRequest {
-
-    @NotNull
-    private final String modifiedString;
+public class SettingsRequest {
     @NotNull
     private final String password;
+    @NotNull
+    private final String fieldToChange;
 
     @JsonCreator
-    public ChangeRequest(@JsonProperty("password") @NotNull String password,
+    public SettingsRequest(@JsonProperty("password") @NotNull String password,
                            @JsonProperty("change") @NotNull String fieldToChange) {
         this.password = password;
-        this.modifiedString = fieldToChange;
+        this.fieldToChange = fieldToChange;
     }
 
     @NotNull
@@ -24,7 +24,8 @@ public class ChangeRequest {
     }
 
     @NotNull
-    public String getModifiedString() {
-        return modifiedString;
+    public String getFieldToChange() {
+        return fieldToChange;
     }
 }
+

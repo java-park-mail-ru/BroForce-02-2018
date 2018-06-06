@@ -1,6 +1,8 @@
-package application.models;
+package application.services;
 
-import application.database.DAOi;
+import application.db.UserDao;
+import application.models.User;
+import application.utils.requests.SignupRequest;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,21 +11,21 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserService {
+public class AccountService {
     @NotNull
-    private final DAOi db;
+    private final UserDao db;
     @NotNull
     private final PasswordEncoder encoder;
 
-    public UserService(@NotNull DAOi db, @NotNull PasswordEncoder encoder) {
+    public AccountService(@NotNull UserDao db, @NotNull PasswordEncoder encoder) {
         this.db = db;
         this.encoder = encoder;
     }
 
     @NotNull
-    public Long createUser(String login, String password, String email) {
-        final String encodedPassword = encoder.encode(password);
-        return db.addUser(login, encodedPassword, email);
+    public Long addUser(@NotNull SignupRequest user) {
+        final String encodedPassword = encoder.encode(user.getPassword());
+        return db.addUser(user.getLogin(), encodedPassword, user.getEmail());
     }
 
     public void changePassword(@NotNull User user, @NotNull String password) {
@@ -39,11 +41,6 @@ public class UserService {
 
     public void changeEmail(@NotNull User user, @NotNull String email) {
         user.setEmail(email);
-        db.changeUserData(user);
-    }
-
-    public void changeAvatar(@NotNull User user, @NotNull String avatar) {
-        user.setAvatar(avatar);
         db.changeUserData(user);
     }
 
@@ -72,14 +69,23 @@ public class UserService {
     public boolean checkSignin(long id, @NotNull String password) {
         final User user = db.getUser(id);
         return user != null && encoder.matches(password, user.getPassword());
+
     }
 
-    public Integer updateScore(long id, boolean result) {
-        return db.updateScore(id, result);
+    public Integer updateSScore(long id, boolean result) {
+        return db.updateSScore(id, result);
     }
 
-    public List<User> getTop(Integer limit, Integer since) {
-        return db.getTop(limit, since);
+    public Integer updateMScore(long id, boolean result) {
+        return db.updateMScore(id, result);
+    }
+
+    public List<User> getSTop(Integer limit, Integer since) {
+        return db.getSTop(limit, since);
+    }
+
+    public List<User> getMTop(Integer limit, Integer since) {
+        return db.getMTop(limit, since);
     }
 
     public void clear() {

@@ -1,4 +1,4 @@
-package application.database;
+package application.db;
 
 import application.models.User;
 import org.jetbrains.annotations.NotNull;
@@ -15,11 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Transactional
-public class DbDAO implements DAOi {
+public class UserDaoImpl implements UserDao {
     @Autowired
     private JdbcTemplate template;
     @NotNull
-    private static final Logger LOGGER = LoggerFactory.getLogger(DbDAO.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserDaoImpl.class);
     private static final Integer SCORE_CHANGE = 25;
 
     @Override
@@ -47,7 +47,9 @@ public class DbDAO implements DAOi {
             new User(res.getLong("id"),
                     res.getString("login"),
                     res.getString("password"),
-                    res.getString("email")
+                    res.getString("email"),
+                    res.getInt("sscore"),
+                    res.getInt("mscore")
             );
 
     @Override
@@ -85,14 +87,27 @@ public class DbDAO implements DAOi {
 
     @Override
     @NotNull
-    public Integer updateScore(long userId, boolean result) {
-        String query = "UPDATE users SET score = score ";
+    public Integer updateSScore(long userId, boolean result) {
+        String query = "UPDATE users SET sscore = sscore ";
         if (result) {
             query += "+ " + SCORE_CHANGE + ' ';
         } else {
             query += "- " + SCORE_CHANGE + ' ';
         }
-        query += "WHERE id = ? RETURNING score";
+        query += "WHERE id = ? RETURNING sscore";
+        return template.queryForObject(query, Integer.class, userId);
+    }
+
+    @Override
+    @NotNull
+    public Integer updateMScore(long userId, boolean result) {
+        String query = "UPDATE users SET mscore = mscore ";
+        if (result) {
+            query += "+ " + SCORE_CHANGE + ' ';
+        } else {
+            query += "- " + SCORE_CHANGE + ' ';
+        }
+        query += "WHERE id = ? RETURNING mscore";
         return template.queryForObject(query, Integer.class, userId);
     }
 
@@ -120,8 +135,15 @@ public class DbDAO implements DAOi {
 
     @Override
     @NotNull
-    public List<User> getTop(@NotNull Integer limit, @NotNull Integer since) {
-        final String query = "SELECT * FROM users ORDER BY score DESC LIMIT ? OFFSET ?";
+    public List<User> getSTop(@NotNull Integer limit, @NotNull Integer since) {
+        final String query = "SELECT * FROM users ORDER BY sscore DESC LIMIT ? OFFSET ?";
+        return template.query(query, USER_MAPPER, limit, since);
+    }
+
+    @Override
+    @NotNull
+    public List<User> getMTop(@NotNull Integer limit, @NotNull Integer since) {
+        final String query = "SELECT * FROM users ORDER BY mscore DESC LIMIT ? OFFSET ?";
         return template.query(query, USER_MAPPER, limit, since);
     }
 

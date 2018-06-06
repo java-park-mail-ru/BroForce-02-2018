@@ -1,41 +1,48 @@
 package application.models;
 
+import javax.validation.constraints.NotNull;
 
 public class User {
     private final Long id;
     private String login;
     private String password;
     private String email;
-    private String avatar;
-    private int score;
+    private int sscore;
+    private int mscore;
 
     public User(Long id, String login, String password, String email) {
         this.id = id;
-        this.login = login;
         this.password = password;
+        this.login = login;
         this.email = email;
-        this.avatar = "";
-        score = 0;
     }
 
-    public Long getId() {
+    public User(Long id, String login, String password, String email, int sscore, int mscore) {
+        this.id = id;
+        this.password = password;
+        this.login = login;
+        this.email = email;
+        this.sscore = sscore;
+        this.mscore = mscore;
+    }
+
+    public long getId() {
         return id;
     }
 
+    @NotNull
     public String getLogin() {
         return login;
     }
 
+    @NotNull
     public String getPassword() {
         return password;
     }
 
+    @NotNull
     public String getEmail() {
         return email;
-    }
-
-    public String getAvatar() {
-        return avatar;
     }
 
     public void setLogin(String login) {
@@ -50,7 +57,19 @@ public class User {
         this.email = email;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public int getSscore() {
+        return sscore;
+    }
+
+    public void setSscore(int sscore) {
+        this.sscore = sscore;
+    }
+
+    public int getMscore() {
+        return mscore;
+    }
+
+    public void setMscore(int mscore) {
+        this.mscore = mscore;
     }
 }

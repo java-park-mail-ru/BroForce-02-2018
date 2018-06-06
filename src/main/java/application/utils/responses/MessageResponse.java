@@ -1,20 +1,19 @@
-package application.controllers.responses;
+package application.utils.responses;
 
-import application.controllers.messages.Message;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotNull;
 
 public class MessageResponse {
+    @NotNull
     private final String message;
 
-    public MessageResponse(@NotNull Message message) {
-        this.message = message.getMessage();
+    public MessageResponse(@JsonProperty("message") @NotNull String message) {
+        this.message = message;
     }
 
-    @JsonProperty("message")
+    @NotNull
     public String getMessage() {
         return message;
     }
 }
-
